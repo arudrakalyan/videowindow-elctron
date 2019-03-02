@@ -1,0 +1,153 @@
+{
+  "name": "video-window",
+  "version": "1.1.1",
+  "description": "Electron application for Video Window",
+  "main": "./build/main.js",
+  "productName": "Video Window",
+  "scripts": {
+    "start": "webpack --config ./webpack.main.js --mode development && concurrently 'npm:watch' 'electron ./build/main.js'",
+    "clean": "rm -rf node_modules build dist",
+    "lint": "eslint . && flow",
+    "build": "webpack --config ./webpack.main.js --mode production && webpack --config ./webpack.renderer.js --mode production",
+    "pack": "npm run build && electron-builder --dir",
+    "dist": "npm run build && electron-builder",
+    "postinstall": "electron-builder install-app-deps",
+    "validate": "npm ls",
+    "watch": "webpack --config ./webpack.renderer.js --mode development --watch --watch-poll"
+  },
+  "build": {
+    "appId": "org.jitsi.jitsi-meet",
+    "productName": "Vdeo Window",
+    "generateUpdatesFilesForAllChannels": true,
+    "files": [
+      "**/*",
+      "resources",
+      "!app",
+      "!main.js"
+    ],
+    "mac": {
+      "artifactName": "Video-Window.${ext}",
+      "category": "public.app-category.video"
+    },
+    "linux": {
+      "artifactName": "Video-Window-${arch}.${ext}",
+      "category": "VideoConference;AudioVideo;Audio;Video;Network",
+      "description": "Video Window",
+      "executableName": "Video-Window",
+      "target": [
+        {
+          "arch": "x64",
+          "target": "AppImage"
+        }
+      ]
+    },
+    "win": {
+      "artifactName": "Video-Window.${ext}",
+      "target": [
+        {
+          "arch": [
+            "ia32",
+            "x64"
+          ],
+          "target": "nsis"
+        }
+      ]
+    },
+    "directories": {
+      "buildResources": "resources"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/muabada/videowindow.git"
+  },
+  "keywords": [
+    "jingle",
+    "webrtc",
+    "xmpp",
+    "electron",
+    "jitsi-meet"
+  ],
+  "author": "Video-Window <support@Video-Window.org>",
+  "readmeFilename": "README.md",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@atlaskit/avatar": "14.1.1",
+    "@atlaskit/button": "9.0.13",
+    "@atlaskit/css-reset": "3.0.2",
+    "@atlaskit/droplist": "7.0.10",
+    "@atlaskit/field-text": "7.0.11",
+    "@atlaskit/icon": "14.0.1",
+    "@atlaskit/navigation": "33.2.0",
+    "@atlaskit/onboarding": "6.0.2",
+    "@atlaskit/page": "8.0.7",
+    "@atlaskit/select": "^7.2.0",
+    "@atlaskit/spinner": "9.0.9",
+    "@atlaskit/theme": "6.1.0",
+    "@atlaskit/toggle": "5.0.9",
+    "@types/jquery": "^3.3.1",
+    "electron-debug": "2.0.0",
+    "electron-is-dev": "1.0.1",
+    "electron-log": "2.2.17",
+    "electron-reload": "1.2.5",
+    "electron-updater": "3.1.2",
+    "electron-window-state": "5.0.1",
+    "history": "4.7.2",
+    "jitsi-meet-electron-utils": "github:jitsi/jitsi-meet-electron-utils#1972c3bf0884ace68eb496894dabae593d6dbf49",
+    "jquery": "^3.3.1",
+    "js-utils": "github:jitsi/js-utils#0c53500a5120be2aa3fc590f0f932a0d4771920f",
+    "moment": "2.22.2",
+    "moment-timezone": "^0.5.23",
+    "mousetrap": "1.6.2",
+    "react": "16.5.2",
+    "react-dom": "16.5.2",
+    "react-redux": "5.0.7",
+    "react-router-redux": "5.0.0-alpha.9",
+    "redux": "4.0.0",
+    "redux-logger": "3.0.6",
+    "redux-persist": "5.10.0",
+    "redux-persist-electron-storage": "1.1.2",
+    "robotjs": "^0.5.1",
+    "source-map-support": "0.5.9",
+    "styled-components": "3.4.10"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.3.3",
+    "@babel/plugin-proposal-class-properties": "^7.3.3",
+    "@babel/plugin-proposal-export-namespace-from": "7.0.0",
+    "@babel/plugin-transform-flow-strip-types": "7.0.0",
+    "@babel/preset-env": "^7.3.1",
+    "@babel/preset-flow": "7.0.0",
+    "@babel/preset-react": "7.0.0",
+    "@types/jquery": "^3.3.1",
+    "babel-eslint": "10.0.1",
+    "babel-loader": "8.0.4",
+    "babel-plugin-inline-react-svg": "1.0.0",
+    "concurrently": "4.0.1",
+    "css-loader": "1.0.0",
+    "devtron": "1.4.0",
+    "electron": "3.0.3",
+    "electron-builder": "20.28.4",
+    "electron-react-devtools": "0.5.3",
+    "eslint": "^5.14.1",
+    "eslint-config-jitsi": "github:jitsi/eslint-config-jitsi#v0.1.0",
+    "eslint-plugin-flowtype": "2.50.3",
+    "eslint-plugin-import": "2.14.0",
+    "eslint-plugin-jsdoc": "3.8.0",
+    "eslint-plugin-react": "7.11.1",
+    "file-loader": "2.0.0",
+    "flow-bin": "0.81.0",
+    "html-webpack-plugin": "3.2.0",
+    "jquery": "^3.3.1",
+    "precommit-hook": "3.0.0",
+    "style-loader": "0.23.1",
+    "svg-inline-loader": "0.8.0",
+    "webpack": "4.20.2",
+    "webpack-cli": "3.1.2"
+  },
+  "pre-commit": [
+    "lint",
+    "validate",
+    "test"
+  ]
+}
